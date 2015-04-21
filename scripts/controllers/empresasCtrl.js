@@ -42,8 +42,8 @@ app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos","divid
 		return benefTotal;
 	};
 	
-	$scope.show=function(indice){
-		$scope.empresas[indice].showme=!$scope.empresas[indice].showme;		
+	$scope.show=function(empresa){
+		return empresa.showme=!empresa.showme;		
 	};
 	
 	$scope.cerrarPestanas=function(){
@@ -56,7 +56,7 @@ app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos","divid
 	};
 	//añade dividendos a una empresa
 	$scope.addDiv=function(empresa){
-		dividendos.addDividendos;
+		dividendos.addDividendo(empresa);
 	};
 
 	

@@ -4,8 +4,8 @@ app.factory("dividendos", ["$http",function($http){
   	}
 	
 	objetoDividendo.addDividendo = function(emp){
-		div=dividendos.newDividendos(emp);
-		dividendos.postDividendos(div);
+		div=objetoDividendo.newDividendo(emp);
+		objetoDividendo.postDividendos(div);
 		this.limpiarFormularioDividendo(emp);
 		alert("Formulario Añadido");
 	};

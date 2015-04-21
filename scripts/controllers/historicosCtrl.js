@@ -1,7 +1,7 @@
 app.controller ("historicosCtrl",["$scope","$http", "historicos","dividendos", function($scope,$http,historicos,dividendos){
 
-	$scope.historicos=historicos.getAll();
-	$scope.dividendos=dividendos.getAll();
+	$scope.historicos=historicos.historicos;
+	$scope.dividendos=dividendos.dividendos;
 	
 	$scope.rentabilidadTotal=function(){
 		rentTotal = 0;
