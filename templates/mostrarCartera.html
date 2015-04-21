@@ -1,0 +1,64 @@
+<body>
+	<h1 class="text-center">Cartera Actual</h1>
+	<div class="col-sm-6" ng-repeat = "empresa in empresas track by $index">
+		<div>
+			<table class="table table-bordered table-hover">
+				<td class="success">
+					<h3 class="text-center">{{empresa.nombre}}</h3>
+
+					<div class="row">
+						<div class="col-sm-6"><label for="empresa.simbolo">Símbolo:</label></div>
+						<div class="col-sm-6">{{empresa.simbolo}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label for="empresa.precioCompra">Precio Compra:</label></div>
+						<div class="col-sm-6">{{empresa.precioCompra}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label for="empresa.numTitulos">Número de títulos:</label></div>
+						<div class="col-sm-6">{{empresa.numTitulos}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label for="empresa.fechaEntrada">Fecha de Entrada:</label></div>
+						<div class="col-sm-6">{{empresa.fechaEntrada | date:'dd-MM-yyy'}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label for="empresa.divisa">Divisa:</label></div>
+						<div class="col-sm-6">{{empresa.divisa}}</div>
+					</div>
+					<div class="row" ng-hide="empresa.divisa=='EUR'">
+						<div class="col-sm-6"><label for="empresa.precioDivisaCompra">Precio Compra {{empresa.divisa}}:</label></div>
+						<div class="col-sm-6">{{empresa.precioDivisaCompra}}</div>
+					</div>
+					<div class="row" ng-show="empresa.divisa=='EUR'">
+						<div class="col-sm-6"><label for="empresa.precioDivisaCompra">Precio Compra {{empresa.divisa}}:</label></div>
+						<div class="col-sm-6">- No es necesario cambio de divisa -</div>
+					</div>
+
+					<button class="btn btn-info" ng-click="show($index)">Cerrar Posición <span class="glyphicon glyphicon-plus"></span></button>
+				</td>
+			</table>
+		</div>
+		<form class="form-horizontal" role="form">
+			<div ng-show="empresa.showme" class="jumbotron">
+				<div class="form-group">
+					<div class="col-sm-6"><label for="empresa.precioVenta">Precio de Venta:</label></div>
+					<div class="col-sm-6"><input class="form-control" type="double" ng-model="empresa.precioVenta" placeholder="Precio de venta"></div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6"><label for="empresa.numTitulosVendidos">Numero de titulos a vender</label></div>
+					<div class="col-sm-6"><input class="form-control" type="number" ng-model="empresa.numTitulosVendidos" placeholder="Actualmente hay {{empresa.numTitulos}}"></div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6"><label for="empresa.fechaSalida">Fecha de la operacion de cierre</label></div>
+					<div class="col-sm-6"><input class="form-control" type="date" ng-model="empresa.fechaSalida" placeholder="Fecha de Salida"></div>
+				</div>
+				<div class="form-group" ng-hide='empresa.divisa=="EUR"||empresa.divisa=="eur"'>
+					<div class="col-sm-6"><label for="empresa.precioDivisaVenta">Precio de la divisa a la venta</label></div>
+					<div class="col-sm-6"><input class="form-control" type="double" ng-model="empresa.precioDivisaVenta"placeholder="Precio de la divisa a la venta"><br></div>
+				</div>
+				<button class="btn btn-success pull-right" ng-click="cerrarPosicion($index)"><span class="glyphicon glyphicon-send"></span></button>		
+			</div>	
+		</form>
+	</div>
+</body>

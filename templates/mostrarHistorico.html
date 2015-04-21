@@ -1,0 +1,104 @@
+<body>
+
+	<h1 class="text-center bg-info">Historico de Operaciones</h1>
+	<div class="col-md-12">	
+		<h2 class="text-center bg-info">Operaciones</h2>
+		<div class="col-sm-6" ng-repeat = "historico in historicos">
+			<table class="table table-bordered table-hover">
+				<td class="warning">
+					<h3 class="text-center">{{historico.nombre}}</h3>
+					<div class="row">
+						<div class="col-sm-6"><label>Símbolo</label></div>
+						<div class="col-sm-6">{{historico.simbolo}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label>Precio Compra</label></div>
+						<div class="col-sm-6">{{historico.precioCompra}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label>PrecioVenta</label></div>
+						<div class="col-sm-6">{{historico.precioVenta}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label>Número de títulos</label></div>
+						<div class="col-sm-6">{{historico.numTitulos}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label>Fecha de Entrada</label></div>
+						<div class="col-sm-6">{{historico.fechaEntrada|date:'dd-MM-yyyy'}}</div>
+					</div>
+						<div class="row">
+						<div class="col-sm-6"><label>Fecha de Salida</label></div>
+						<div class="col-sm-6">{{historico.fechaSalida|date:'dd-MM-yyyy'}}</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-6"><label>Divisa</label></div>
+						<div class="col-sm-6">{{historico.divisa}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label>Cotización de la divisa en la venta</label></div>
+						<div class="col-sm-6">{{historico.precioDivisaVenta}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label>Beneficio Neto</label></div>
+						<div class="col-sm-6">{{historico.beneficio}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label>Inversion Incial en Euros</label></div>
+						<div class="col-sm-6">{{historico.inversionInicial}}</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6"><label>Rentabilidad</label></div>
+						<div class="<col-sm></col-sm>-6">{{historico.rentabilidad}}%</div>
+					</div>
+				</td>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<h2 class="text-center bg-info">Dividendos</h2>
+
+		<div class="col-sm-6" ng-repeat = "dividendo in dividendos">
+			<table class="table table-bordered table-hover">	
+				<td class="Success">
+					<h3>{{dividendo.nombre}}</h3>
+					<div class = "row">
+						<div class="col-md-6"><strong>Simbolo</strong></div>
+						<div class="col-md-6">{{dividendo.simbolo}}</div>
+					</div>
+					<div class = "row">
+						<div class="col-md-6"><strong>Dividendo</strong></div>
+						<div class="col-md-6">{{dividendo.dividendo}}  por acción</div>
+					</div>
+					<div class = "row">
+						<div class="col-md-6"><strong>Cantidad percibida en el dividendo:</strong></div>
+						<div class="col-md-6">{{dividendo.ingresoDividendo}}<span class="glyphicon glyphicon-euro"></span></div>
+					</div>
+					<div class = "row">
+						<div class="col-md-6"><strong>Fecha del ingreso del dividendo:</strong></div>
+						<div class="col-md-6">{{dividendo.fecha|date:'dd-MM-yyyy'}}</div>
+					</div>
+					<div class = "row">
+						<div class="col-md-6"><strong>Rentabilidad del Dividendo:</strong></div>
+						<div class="col-md-6">{{dividendo.rentabilidad}} %</div>
+					</div>
+				</td>
+			</table>
+		</div>
+	</div>
+
+	<table class="table table-bordered table-hover">
+		<td class="success">
+			<h2 class="text-center bg-success">Total</h2>
+			<div class="row">
+				<h4 class="col-lg-4">Beneficio Total Acumulado:</h4> 
+				<h4 class="col-lg-4">{{beneficioTotal()}}</h4>
+			</div>
+			<div class="row">
+				<h4 class="col-lg-4">Rentabilidad Total Acumulada (sin dividendos): </h4>
+				<h4 class="col-lg-4">{{rentabilidadTotal()}} %</h4>
+			</div>
+		</td>
+	</table>
+</body>
