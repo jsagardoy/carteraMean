@@ -4,6 +4,7 @@ var app= express();
 var mongojs = require("mongojs");
 var db = mongojs("cartera",["cartera"]);
 var db2 = mongojs("historicos",["historicos"]);
+var db3 = mongojs("dividendos",["dividendos"]);
 
 var bodyParser = require("body-parser");
 
@@ -11,6 +12,9 @@ var bodyParser = require("body-parser");
 app.use(express.static("../"));
 app.use(bodyParser.json());
 
+//CARTERA
+
+//GET
 app.get("/mostrarCartera",function(req,res){
 
 	console.log("I received a request");
@@ -22,6 +26,7 @@ app.get("/mostrarCartera",function(req,res){
 	});	
 });
 
+//POST
 app.post("/agregarCartera",function(req,res){
 		console.log("AGREGAR CARTERA");
 		console.log(req.body);
@@ -30,6 +35,20 @@ app.post("/agregarCartera",function(req,res){
 		});
 	});
 
+//DELETE
+app.delete("/cerrarCartera/:id", function(req, res){
+	var id = req.params.id;
+	console.log("ELIMINAR");
+	console.log(id);
+	db.cartera.remove({_id: mongojs.ObjectId(id)}, function(err,docs){
+		res.json(docs);
+	});
+	
+});
+
+//HISTORICOS
+
+//GET
 app.get("/historicos",function(req,res){
 
 	console.log("I received a request");
@@ -40,6 +59,7 @@ app.get("/historicos",function(req,res){
 	});	
 });
 
+//POST
 app.post("/historicos", function(req,res){
 		console.log("AGREGAR HISTORICO");
 		console.log(req.body);
@@ -47,16 +67,29 @@ app.post("/historicos", function(req,res){
 			res.json(docs);
 		});
 });
+		
+//DIVIDENDOS
 
-app.delete("/cerrarCartera/:id", function(req, res){
-	var id = req.params.id;
-	console.log("ELIMINAR");
-	console.log(id);
-	db.cartera.remove({_id: mongojs.ObjectId(id)}, function(err,docs){
+//GET
+app.get("/dividendos",function(req,res){
+
+	console.log("I received a request");
+	db3.dividendos.find(function(err, docs){
+		console.log("MOSTRAR DIVIDENDO");
+		console.log(docs);
 		res.json(docs);
-	});
-	
+	});	
 });
-		   
+
+//POST
+app.post("/dividendos", function(req,res){
+		console.log("AGREGAR HISTORICO");
+		console.log(req.body);
+		db3.dividendos.insert(req.body, function(err,docs){
+			res.json(docs);
+		});
+});
+
+
 app.listen(3000);
-console.log("Server listening on port 4000");
+console.log("Server listening on port 3000");

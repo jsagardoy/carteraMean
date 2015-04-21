@@ -1,7 +1,8 @@
-app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos",function($scope,$http,empresas, historicos){
-	//$scope.empresas=empresas.empresas;
-	$scope.empresas=empresas.getEmpresas();
+app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos","dividendos", function($scope,$http,empresas, historicos,dividendos){
+	$scope.empresas=empresas.empresas;
+	//$scope.empresas=empresas.getEmpresas();
 	$scope.historicos=historicos.historicos;
+	$scope.dividendos=dividendos.dividendos;
 	
 	
 	$scope.addEmpresa=function(){
@@ -24,7 +25,8 @@ app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos",functi
 	
 	$scope.cerrarPosicion = function(indice){
 		emp=$scope.empresas[indice];		
-		empresas.cerrarPosicionEmpresa(emp, historicos);			
+		empresas.cerrarPosicionEmpresa(emp, historicos);
+		$scope.cerrarPestanas();
 			//$scope.show(indice);
 	};
 	
@@ -41,20 +43,21 @@ app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos",functi
 	};
 	
 	$scope.show=function(indice){
-		$scope.empresas[indice].showme=!$scope.empresas[indice].showme;
-			
+		$scope.empresas[indice].showme=!$scope.empresas[indice].showme;		
 	};
 	
 	$scope.cerrarPestanas=function(){
+		//$scope.empresas=empresas.getEmpresas();
 		for (i=0;i<$scope.empresas.length;i++){
 			if($scope.empresas[i].showme==true){
 				$scope.empresas[i].showme=false;
 			}
 		}
 	};
+	//añade dividendos a una empresa
+	$scope.addDiv=function(empresa){
+		dividendos.addDividendos;
+	};
 
-
-	
-	$scope.cerrarPestanas();
 	
 }]);

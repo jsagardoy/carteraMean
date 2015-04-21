@@ -45,10 +45,9 @@ app.factory("empresas", ["$http", function($http){
 		$http.get('/mostrarCartera').success(function(response){
 			console.log("success:"+response);
 			objetoEmpresa.empresas=response||[];
-			return response;
+			return objetoEmpresa.empresas;
 		});
 		console.log(objetoEmpresa.empresas);
-		return objetoEmpresa.empresas;
 	};
 	
 	objetoEmpresa.postEmpresa = function(empresa){

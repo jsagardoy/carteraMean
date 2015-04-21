@@ -3,6 +3,35 @@ app.factory("historicos",["$http", function($http){
     	historicos: []
   	}
 	
+	objetoHistorico.newHistorico = function(nombre,simbolo, precioCompra, precioVenta, fechaEntrada,
+											 fechaSalida, divisa, precioDivisaCompra, precioDivisaVenta,
+											 numTitulos,numTitulosVendidos, inversionInicial, benficio, rentabilidad){
+		
+		hist={
+				nombre: nombre,
+				simbolo: simbolo,
+
+				precioCompra: precioCompra,
+				precioVenta:  precioVenta, 			
+
+				fechaEntrada: fechaEntrada,
+				fechaSalida:  fechaSalida,
+
+				divisa: divisa,
+
+				precioDivisaCompra:precioDivisaCompra,
+				precioDivisaVenta:precioDivisaVenta,
+
+				numTitulos: numTitulos,
+				numTitulosVendidos: numTitulosVendidos,
+
+				inversionInicial: inversionInicial,
+				beneficio: beneficio,
+				rentabilidad:rentabilidad
+		}
+			return hist;
+	}
+	
 	objetoHistorico.addHistoricos = function(empresa){
 		
 		if (empresa.divisa !="EUR" && empresa.divisa!="eur"){	
@@ -12,7 +41,7 @@ app.factory("historicos",["$http", function($http){
 				precioDivisaCompra= 1;
 				precioDivisaVenta= 1;
 			}
-		
+		//Calculo de datos
 		beneficio = (empresa.precioVenta - empresa.precioCompra)*empresa.numTitulosVendidos/precioDivisaVenta;
 		inversionInicial = (empresa.precioCompra*empresa.numTitulos)/empresa.precioDivisaCompra;
 		inversionInicial = inversionInicial.toFixed(2);
@@ -20,31 +49,15 @@ app.factory("historicos",["$http", function($http){
 		beneficio = beneficio.toFixed(2);
 		rentabilidad=rentabilidad.toFixed(2);
 		
-		historico={
-			nombre: empresa.nombre,
-			simbolo: empresa.simbolo,
-			
-			precioCompra: empresa.precioCompra,
-			precioVenta:  empresa.precioVenta, 			
-			
-			fechaEntrada: empresa.fechaEntrada,
-			fechaSalida:  empresa.fechaSalida,
-			
-			divisa: empresa.divisa,
-			
-			precioDivisaCompra:precioDivisaCompra,
-			precioDivisaVenta:precioDivisaVenta,
-			
-			numTitulos: empresa.numTitulos,
-			numTitulosVendidos:  empresa.numTitulosVendidos,
-			
-			inversionInicial: inversionInicial,
-			beneficio: beneficio,
-			rentabilidad:rentabilidad
-		};
+		historico=objetoHistorico.newHistorico(empresa.nombre, empresa.simbolo, empresa.precioCompra, empresa.precioVenta,
+											  empresa.fechaEntrada, empresa.fechaSalida, empresa.divisa, precioDivisaCompra,
+											   precioDivisaVenta,empresa.numTitulos,empresa.numTitulos,empresa.numTitulosVendidos,
+											  inversionInicial, beneficio, rentabilidad);
+		
 		objetoHistorico.postHistorico(historico);
 	
 	};
+	
 	
 	//MANEJO BBDD
 	objetoHistorico.getAll = function(){
@@ -53,8 +66,9 @@ app.factory("historicos",["$http", function($http){
 	
 	objetoHistorico.getHistoricos=function(){
 			 return $http.get('/historicos').success(function(response){
-						objetoHistorico.historicos=angular.copy(response);		
+						objetoHistorico.historicos=angular.copy(response);	
 					});
+			
 	};
 	
 	objetoHistorico.postHistorico = function(historico){
