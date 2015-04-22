@@ -6,45 +6,44 @@
 		</div>
 	</form>
 	
-	<div class="col-sm-6" ng-repeat="empresa in empresas | filter:buscar track by $index">
-		<table class="table table-bordered table-hover">
-			<td class="success">
-				<div class="row">
-					<div class="col-sm-2"><label>Nombre:</label></div>
-					<div class="col-sm-10">{{empresa.nombre}}</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-2"><label>Simbolo:</label></div>
-					<div class="col-sm-10">{{empresa.simbolo}}</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-2"><label>Divisa:</label></div>
-					<div class="col-sm-10">{{empresa.divisa}}</div>
-				</div>
-				<div class="col-sm-"><button class="btn btn-info col-sm-6" ng-click="show(empresa)"><span class="glyphicon glyphicon-plus"></span> Introducir Dividendo</button></div>
-			</td>
+	<div ng-repeat="empresa in empresas | filter:buscar track by $index">
+		<table class="table table-condensed"  >
+			<tr style="width=auto;">
+				<td><label>Nombre:</label></td>
+				<td>{{empresa.nombre}}</td>
+			
+				<td><label>Simbolo:</label></td>
+				<td>{{empresa.simbolo}}</td>
+			
+				<td><label>Divisa:</label></td>
+				<td>{{empresa.divisa}}</td>
+				<td><button class="btn btn-info" ng-click="show(empresa)"><span class="glyphicon glyphicon-plus"></span></button></td>
+			</tr>	
 		</table>
-	
-		<form class="form-horizontal" role="form">
-			<div ng-show="empresa.showme" class="jumbotron">
-				<div class="form-group">
-					<div class="col-sm-6"><label>Dividendo por acción: </label></div>
-					<div class="col-sm-6"><input class="form-control" type="double" ng-model="empresa.dividendoAccion" placeholder="Dividendo por Acción"></div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-6"><label>Precio de cotización Actual </label></div>
-					<div class="col-sm-6"><input class="form-control" type="double" ng-model="empresa.precioCotizacion" placeholder="Precio de cotización Actual"></div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-6"><label>Fecha del dividendo: </label></div>
-					<div class="col-sm-6"><input class="form-control col-sm-1" type="date" ng-model="empresa.fechaDividendo" placeholder="Fecha del dividendo"></div>
-				</div>
-				<div class="form-group">
-					<div ng-hide='empresa.divisa=="EUR"||empresa.divisa=="eur"'>
-						<div class="col-sm-6"><label>Precio del la divisa en el dividendo </label></div>
-						<div class="col-sm-6"><input class="form-control col-sm-1" type="double" ng-model="empresa.precioDivisaDividendo"placeholder="Precio de la divisa en el momento del dividendo"></div>
-					</div>
-				</div>	
+		<form class="form-horizontal form-inline" role="form">
+			<div ng-show="empresa.showme" class="jumbotron" >
+				<table class="table table-condensed">
+					<tr>
+						<th>Dividendo por acción</th>
+						<th>Precio de cotización Actual</th>
+						<th>Fecha del dividendo</th>			
+						<div ng-hide='empresa.divisa=="EUR"||empresa.divisa=="eur"'>
+							<th>Precio del la divisa en el dividendo </th>
+						</div>
+					</tr>
+					<tr>
+						<div class="input-group">
+							
+						
+							<td><input class="form-control" type="double" ng-model="empresa.dividendoAccion" placeholder="Dividendo por Acción"></td>
+							<td><input class="form-control" type="double" ng-model="empresa.precioCotizacion" placeholder="Precio de cotización Actual"></td>
+							<td><input class="form-control" type="date" ng-model="empresa.fechaDividendo" placeholder="Fecha del dividendo"></td>
+							<div ng-hide='empresa.divisa=="EUR"||empresa.divisa=="eur"'>
+							<td><input class="form-control" type="double" ng-model="empresa.precioDivisaDividendo"placeholder="Precio de la divisa en el momento del dividendo"></td>
+							</div>
+						</div>
+					</tr>
+				</table>
 					<button class="btn btn-success pull-right" ng-click="addDiv(empresa)">Añadir</button>
 			</div>
 		</form>

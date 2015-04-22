@@ -23,11 +23,11 @@ app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos","divid
 		$scope.precioDivisaCompra='';
 	};
 	
-	$scope.cerrarPosicion = function(indice){
-		emp=$scope.empresas[indice];		
+	$scope.cerrarPosicion = function(empresa){
+		emp=empresa;		
 		empresas.cerrarPosicionEmpresa(emp, historicos);
-		$scope.cerrarPestanas();
-			//$scope.show(indice);
+		//$scope.cerrarPestanas();
+		//$scope.show(empresa);
 	};
 	
 	$scope.beneficioTotal=function(){
@@ -43,14 +43,18 @@ app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos","divid
 	};
 	
 	$scope.show=function(empresa){
-		return empresa.showme=!empresa.showme;		
+		empresa.showme=!empresa.showme;		
+	};
+	
+	$scope.showCerrar=function(empresa){
+		empresa.showmeCerrar=!empresa.showmeCerrar;		
 	};
 	
 	$scope.cerrarPestanas=function(){
 		//$scope.empresas=empresas.getEmpresas();
 		for (i=0;i<$scope.empresas.length;i++){
-			if($scope.empresas[i].showme==true){
-				$scope.empresas[i].showme=false;
+			if($scope.empresas[i].showmeCerrar==true){
+				$scope.empresas[i].showmeCerrar=false;
 			}
 		}
 	};
