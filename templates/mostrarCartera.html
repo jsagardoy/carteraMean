@@ -2,7 +2,9 @@
 	<h1 class="text-center">Cartera Actual</h1>
 
 		<div class="col-sm-12" ng-repeat = "empresa in empresas track by $index">	
-		<button class="btn btn-primary btn-hover btn-block btn-block col-sm-12" ng-click="show(empresa)"><strong>{{empresa.nombre}} - {{empresa.simbolo}}</strong></button>
+			<button class="btn btn-primary btn-hover btn-block btn-block col-sm-12" ng-click="show(empresa)"><strong>{{empresa.nombre}}</strong> -
+				<strong>Simbolo: </strong>{{empresa.simbolo}} - <strong>Inversión Inicial:</strong> {{empresa.numTitulos*empresa.precioCompra}} {{empresa.divisa}}
+			</button>
 		<br><br>
 		
 		<div>

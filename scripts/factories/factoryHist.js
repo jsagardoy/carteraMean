@@ -43,15 +43,16 @@ app.factory("historicos",["$http", function($http){
 			}
 		//Calculo de datos
 		beneficio = (empresa.precioVenta - empresa.precioCompra)*empresa.numTitulosVendidos/precioDivisaVenta;
-		inversionInicial = (empresa.precioCompra*empresa.numTitulos)/empresa.precioDivisaCompra;
+		inversionInicial = (empresa.precioCompra*empresa.numTitulos)/precioDivisaCompra;
 		inversionInicial = inversionInicial.toFixed(2);
 		rentabilidad = beneficio/inversionInicial*100;
 		beneficio = beneficio.toFixed(2);
-		rentabilidad=rentabilidad.toFixed(2);
+		rentabilidad=rentabilidad.toFixed(2);		
+		
 		
 		historico=objetoHistorico.newHistorico(empresa.nombre, empresa.simbolo, empresa.precioCompra, empresa.precioVenta,
 											  empresa.fechaEntrada, empresa.fechaSalida, empresa.divisa, precioDivisaCompra,
-											   precioDivisaVenta,empresa.numTitulos,empresa.numTitulos,empresa.numTitulosVendidos,
+											   precioDivisaVenta,empresa.numTitulos,empresa.numTitulosVendidos,
 											  inversionInicial, beneficio, rentabilidad);
 		
 		objetoHistorico.postHistorico(historico);

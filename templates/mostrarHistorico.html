@@ -1,88 +1,111 @@
 <body>
 
-	<u><h1 class="text-center bg-default">Historico de Operaciones</h1></u>
+	<u><h1 class="text-left bg-default">Historico de Operaciones</h1></u>
 	<div class="container bg-default">
-		<h2 class="text-center bg-default">Operaciones <button class="btn btn-info" ng-click="mostrarContenidoHistoricos()">
-															<span ng-show="mostarContenidoHistoricos==false" class="glyphicon glyphicon-plus bt btn-info"></span>
-															<span ng-show="mostarContenidoHistoricos==true" class="glyphicon glyphicon-minus bt btn-info"></span>
-													   </button>
+		<h2 class="text-left bg-default">
+			<button class="btn btn-info" ng-click="mostrarContenidoHistoricos()">
+				<span ng-show="mostarContenidoHistoricos==false" class="glyphicon glyphicon-plus bt btn-info"></span>
+				<span ng-show="mostarContenidoHistoricos==true" class="glyphicon glyphicon-minus bt btn-info"></span>
+				</button> Operaciones
 		</h2>
 		
 		<div ng-show="mostarContenidoHistoricos" ng-repeat = "historico in historicos | orderBy:'nombre' ">
-			<table class="table table-condensed">	
-				<tr>
-					<td class="text text-center">			
-						<strong>{{historico.nombre}}</strong> - <strong>Simbolo: </strong>{{historico.simbolo}} - 
-						<strong>Inversión: </strong>{{historico.inversionInicial}} - 
-						<strong>Beneficio: </strong>{{historico.beneficio}}€ ({{historico.rentabilidad}}%)
-							<button class="btn btn-info pull-right" ng-click="mostrarHistorico(historico)">
-								<span ng-show="historico.mostrar==false || angular.isUndefined('historico.mostrar') || historico.mostrar===null" class="glyphicon glyphicon-plus bt btn-info"></span>
+			<div class="container">
+				<table class="table table-condensed">	
+					<tr>
+						<td>
+							<button class="pull-right btn btn-info" ng-click="mostrarHistorico(historico)">
+								<span ng-show="historico.mostrar==false || angular.isUndefined(historico.mostrar) || historico.mostrar==null" class="glyphicon glyphicon-plus bt btn-info"></span>
 								<span ng-show="historico.mostrar==true" class="glyphicon glyphicon-minus bt btn-info"></span>
 							</button>
-
-						</div>
-					</td>
-				</tr>
-			</table>
-				
-
-			<div class="jumbotron" ng-show="historico.mostrar">
-				<table class="table table-condensed text text-center">
-					<tr>
-						<th>Precio Compra:</th>
-						<th>PrecioVenta:</th>
-						<th>Número de títulos:</th>
-						<th>Fecha de Entrada:</th>
-						<th>Fecha de Salida:</th>
-						<th>Divisa: </th>
-						<th>Cot. Divisa Venta: </th>
+						</td>
+						<td ng-if="historico.beneficio>0" class="text text-success bg-success col-sm-12">
+							<strong>{{historico.nombre}}</strong> - <strong>Simbolo: </strong>{{historico.simbolo}} - 
+							<strong>Inversión: </strong>{{historico.inversionInicial}} - 
+							<strong>Beneficio: </strong>							
+									{{historico.beneficio}}€ ({{historico.rentabilidad}}%)	
+						</td>
+						<td ng-if="historico.beneficio<0" class="text text-danger bg-danger col-sm-12">
+							<strong>{{historico.nombre}}</strong> - <strong>Simbolo: </strong>{{historico.simbolo}} - 
+							<strong>Inversión: </strong>{{historico.inversionInicial}} - 
+							<strong>Beneficio: </strong>							
+									{{historico.beneficio}}€ ({{historico.rentabilidad}}%)	
+						</td>
+						<td ng-if="historico.beneficio==0" class="text text-default bg-default col-sm-12">
+							<strong>{{historico.nombre}}</strong> - <strong>Simbolo: </strong>{{historico.simbolo}} - 
+							<strong>Inversión: </strong>{{historico.inversionInicial}} - 
+							<strong>Beneficio: </strong>							
+									{{historico.beneficio}}€ ({{historico.rentabilidad}}%)	
+						</td>
 					</tr>
+				</table>
+				<div class="jumbotron " ng-show="historico.mostrar">
+					<table class="table table-condensed text text-center">
+						<tr>
+							<th>Precio Compra:</th>
+							<th>PrecioVenta:</th>
+							<th>Número de títulos:</th>
+							<th>Fecha de Entrada:</th>
+							<th>Fecha de Salida:</th>
+							<th>Divisa: </th>
+							<th>Cot. Divisa Venta: </th>
+						</tr>
+						<tr>
+							<td>{{historico.precioCompra}}</td>
+							<td>{{historico.precioVenta}}</td>
+							<td>{{historico.numTitulos}}</td>
+							<td>{{historico.fechaEntrada|date:'dd-MM-yyyy'}}</td>
+							<td>{{historico.fechaSalida|date:'dd-MM-yyyy'}}</td>
+							<td>{{historico.divisa}}</td>
+							<td>{{historico.precioDivisaVenta}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container bg-default">
+		<h2 class="text-left bg-default">
+			<button class="btn btn-info" ng-click="mostrarContenidoDividendos()">
+				<span ng-show="mostarContenidoDividendos==false" class="glyphicon glyphicon-plus bt btn-info"></span>
+				<span ng-show="mostarContenidoDividendos==true" class="glyphicon glyphicon-minus bt btn-info"></span>	
+			</button> Dividendos 
+		</h2>
+		<div ng-show="mostarContenidoDividendos" ng-repeat = "dividendo in dividendos">
+			<div class="container">			
+				<table class="table table-condensed">		
 					<tr>
-						<td>{{historico.precioCompra}}</td>
-						<td>{{historico.precioVenta}}</td>
-						<td>{{historico.numTitulos}}</td>
-						<td>{{historico.fechaEntrada|date:'dd-MM-yyyy'}}</td>
-						<td>{{historico.fechaSalida|date:'dd-MM-yyyy'}}</td>
-						<td>{{historico.divisa}}</td>
-						<td>{{historico.precioDivisaVenta}}</td>
+						<td class="text-left">
+							<strong>{{dividendo.nombre}}</strong> - 
+							<strong>Simbolo: </strong> {{dividendo.simbolo}} - 
+							<strong>Dividendo: </strong>{{dividendo.dividendo}} - 
+							<strong>Ing. Netos: </strong> {{dividendo.ingresoDividendo}} - 
+							<strong>Fecha: </strong>{{dividendo.fecha|date:'dd-MM-yyyy'}} -
+							<strong>Rentabilidad: </strong>{{dividendo.rentabilidad}} %
+						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	<div class="container bg-default">
-		<h2 class="text-center bg-default">Dividendos <button class="btn btn-info" ng-click="mostrarContenidoDividendos()">
-									<span ng-show="mostarContenidoDividendos==false" class="glyphicon glyphicon-plus bt btn-info"></span>
-									<span ng-show="mostarContenidoDividendos==true" class="glyphicon glyphicon-minus bt btn-info"></span>	
-								</button></h2>
-		<div ng-show="mostarContenidoDividendos" ng-repeat = "dividendo in dividendos">
-			<table class="table table-condensed">		
-				<tr>
-					<td class="text-center">
-						<strong>{{dividendo.nombre}}</strong> - 
-						<strong>Simbolo: </strong> {{dividendo.simbolo}} - 
-						<strong>Dividendo: </strong>{{dividendo.dividendo}} - 
-						<strong>Ing. Netos: </strong> {{dividendo.ingresoDividendo}} - 
-						<strong>Fecha: </strong>{{dividendo.fecha|date:'dd-MM-yyyy'}} -
-						<strong>Rentabilidad: </strong>{{dividendo.rentabilidad}} %
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
+	
+	<u><h2 class="text-left bg-default">Total</h2></u>
 
+		
+	<div class="container bg-default">
 	<table class="table table-condensed">
-		<u><h2 class="text-center bg-default">Total</h2></u>
 		<tr>
-			<td><strong>Beneficio Total Acumulado:</strong></td>
+			<td ><strong>Beneficio Total Acumulado:</strong></td>
 			<td ng-if="beneficioTotal()>0" class="text text-success text-center bg-success">{{beneficioTotal()}}€</td>
-			<td ng-if="beneficioTotal()<0" class="text text-error text-center bg-error">{{beneficioTotal()}}€</td>
+			<td ng-if="beneficioTotal()<0" class="text text-danger text-center bg-danger">{{beneficioTotal()}}€</td>
 			<td ng-if="beneficioTotal()==0" class="text text-default text-center bg-default">{{beneficioTotal()}}€</td>
 		</tr>
 		<tr>
 			<td><strong>Rentabilidad Total Acumulada (sin dividendos): </strong></td>
-			<td>{{rentabilidadTotal()}} %</h4>
-			</div>
+			<td ng-if="rentabilidadTotal()>0" class="text text-success text-center bg-success">{{rentabilidadTotal()}} %</td>
+			<td ng-if="rentabilidadTotal()<0" class="text text-danger text-center bg-danger">{{rentabilidadTotal()}} % </td>
+			<td ng-if="rentabilidadTotal()==0" class="text text-default text-center bg-default">{{rentabilidadTotal()}} % </td>
 		</tr>
 	</table>
+	</div>
 </body>
