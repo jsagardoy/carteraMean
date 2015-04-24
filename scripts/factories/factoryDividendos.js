@@ -22,23 +22,24 @@ app.factory("dividendos", ["$http",function($http){
 	objetoDividendo.newDividendo=function(emp){
 		
 		if (emp.divisa !="EUR" && emp.divisa!="eur"){
-			tipoCambio=emp.precioDivisaDividendo;
+			tipoCambio=Number(emp.precioDivisaDividendo);
 		}else{
 			tipoCambio=1;
 		}
 		
-		ingresoDividendo = (parseFloat(emp.dividendoAccion)*parseFloat(emp.numTitulos))/tipoCambio;
+		ingresoDividendo = (parseFloat(emp.dividendoAccion)*parseFloat(emp.numTitulos))/parseFloat(tipoCambio);
 		rentabilidadDividendo=parseFloat(emp.dividendoAccion)/parseFloat(emp.precioCotizacion)*100;
 		rentabilidadDividendo=rentabilidadDividendo.toFixed(2);
+		ingresoDividendo=ingresoDividendo.toFixed(2);
 	
 		div={
 			nombre:emp.nombre,
-			dividendo:emp.dividendoAccion,
+			dividendo:Number(emp.dividendoAccion),
 			simbolo:emp.simbolo,
 			ingresoDividendo:ingresoDividendo,
 			fecha:emp.fechaDividendo,
-			precioDivisaDividendo:tipoCambio,
-			rentabilidad:rentabilidadDividendo
+			precioDivisaDividendo:Number(tipoCambio),
+			rentabilidad:Number(rentabilidadDividendo)
 		};
 		return div;
 	}

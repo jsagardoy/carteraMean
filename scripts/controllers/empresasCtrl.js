@@ -33,10 +33,10 @@ app.controller ("empresasCtrl",["$scope","$http", "empresas","historicos","divid
 	$scope.beneficioTotal=function(){
 		benefTotal = 0;
 		for (i = 0;i<$scope.historicos.length;i++){
-			benefTotal = benefTotal+parseFloat($scope.historicos[i].beneficio);
+			benefTotal = benefTotal+parseFloat(Number($scope.historicos[i].beneficio));
 		}
 		for (i = 0;i<$scope.dividendos.length;i++){
-			benefTotal = benefTotal+parseFloat($scope.dividendos[i].ingresoDividendo);
+			benefTotal = benefTotal+parseFloat(Number($scope.dividendos[i].ingresoDividendo));
 		}
 		//benefTotal=benefTotal.toFixed(2);
 		return benefTotal;

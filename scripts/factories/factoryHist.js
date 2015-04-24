@@ -61,7 +61,7 @@ app.factory("historicos",["$http", function($http){
 	
 	//MANEJO BBDD
 	objetoHistorico.getAll = function(){
-            	objetoHistorico.getHistoricos();           	
+            	return objetoHistorico.getHistoricos();           	
         	};
 	
 	objetoHistorico.getHistoricos=function(){

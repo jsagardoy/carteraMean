@@ -6,11 +6,11 @@ app.factory("empresas", ["$http", function($http){
 		empresa={
 				nombre:nombre,
 				simbolo:simbolo,
-				precioCompra:precioCompra,
-				numTitulos:numTitulos,
+				precioCompra:Number(precioCompra),
+				numTitulos:Number(numTitulos),
 				fechaEntrada:fechaEntrada,
 				divisa:divisa,
-				precioDivisaCompra:precioDivisaCompra
+				precioDivisaCompra:Number(precioDivisaCompra)
 			}
 			return empresa;
 	};
@@ -22,11 +22,9 @@ app.factory("empresas", ["$http", function($http){
 	
 	objetoEmpresa.cerrarPosicionEmpresa = function(emp,historicos){
 
-		if(emp.numTitulos==emp.numTitulosVendidos){
-			console.log("numero de Empresas antes: "+objetoEmpresa.empresas.length);
+		if(emp.numTitulos==emp.numTitulosVendidos){		
 			historicos.addHistoricos(emp);
 			objetoEmpresa.removeEmpresa(emp._id);
-			console.log("numero de Empresas despues: "+objetoEmpresa.empresas.length);
 		}
 		else {//en el caso de que se cierren solo una parte de la posición.//tiene que actualizar la BBDD
 			numTitulosRestantes=emp.numTitulos-emp.numTitulosVendidos;
@@ -45,7 +43,7 @@ app.factory("empresas", ["$http", function($http){
 		$http.get('/mostrarCartera').success(function(response){
 			console.log("success:"+response);
 			objetoEmpresa.empresas=response||[];
-			return objetoEmpresa.empresas;
+			return objetoEmpresa.empresas;			
 		});
 		console.log(objetoEmpresa.empresas);
 	};
